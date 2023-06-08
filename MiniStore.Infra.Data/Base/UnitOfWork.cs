@@ -14,11 +14,12 @@ namespace MiniStore.Infra.Data.Base
             _miniStoreDbContext = miniStoreDbContext;
         }
 
-        private IProdutoRepository _produtoRepository;
+        private IProdutoRepository? _produtoRepository;
         public IProdutoRepository ProdutoRepository
         {
             get => _produtoRepository ?? (_produtoRepository = new ProdutoRepository(_miniStoreDbContext));
         }
+
 
         public async Task<bool> Commit()
         {

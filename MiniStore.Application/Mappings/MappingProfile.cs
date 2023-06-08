@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using MiniStore.Application.DTOs;
+using MiniStore.Domain.Entities;
 
 namespace MiniStore.Infra.Data.Mappings
 {
@@ -6,7 +8,8 @@ namespace MiniStore.Infra.Data.Mappings
     {
         public MappingProfile()
         {
-
+            CreateMap<Produto, ProdutoDTO>().ReverseMap();
+           
         }
     }
 }

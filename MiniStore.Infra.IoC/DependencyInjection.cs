@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MiniStore.Application.Interfaces;
+using MiniStore.Application.Services;
 using MiniStore.Domain.Interfaces;
 using MiniStore.Infra.Data.Base;
 using MiniStore.Infra.Data.Context;
@@ -20,6 +22,10 @@ namespace MiniStore.Infra.IoC
             // Repositorios
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
+
+            // Serviços
+            services.AddScoped<IProdutoService, ProdutoService>();
+            services.AddScoped<ICategoriaService, CategoriaService>();
 
 
             return services;
