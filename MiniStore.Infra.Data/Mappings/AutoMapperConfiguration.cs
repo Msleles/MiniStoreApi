@@ -13,7 +13,7 @@ namespace MiniStore.Infra.Data.Mappings
             });
 
             IMapper mapper = mapperConfig.CreateMapper();
-            services.AddSingleton(mapper);
+            services.AddScoped<IMapper>(provider => mapper);
         }
     }
 }
