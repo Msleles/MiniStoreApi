@@ -9,7 +9,7 @@ namespace MiniStore.Infra.Data.Mappings
         public MappingProfile()
         {
             CreateMap<Produto, ProdutoDTO>().ReverseMap();
-           
+            CreateMap<Categoria, CategoriaDTO>().ReverseMap();        
         }
     }
 }

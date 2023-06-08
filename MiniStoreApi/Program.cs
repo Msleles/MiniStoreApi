@@ -1,11 +1,15 @@
+
 using MiniStore.Infra.Data.Mappings;
 using MiniStore.Infra.IoC;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddInfrastructure(builder.Configuration);
 AutoMapperConfiguration.AddAutoMapper(builder.Services);
 
 builder.Services.AddControllers();
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
