@@ -1,6 +1,6 @@
 # MiniStoreApi
 
-[Descrição do projeto]
+Mini Api construída seguindo os padrões clean architecture como forma de estudo e aprendizado na plataforma .NET
 
 ## Requisitos
 
