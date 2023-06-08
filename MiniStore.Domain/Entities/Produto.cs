@@ -6,5 +6,7 @@ namespace MiniStore.Domain.Entities
     {
         public string? Nome { get; set; }
         public decimal Preco { get; set; }
+        public Guid CategoriaId { get; set; }
+        public Categoria? Categoria { get; set; }
     }
 }
