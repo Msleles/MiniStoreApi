@@ -1,8 +1,9 @@
+using MiniStore.Infra.Data.Mappings;
 using MiniStore.Infra.IoC;
 
 var builder = WebApplication.CreateBuilder(args);
-
 builder.Services.AddInfrastructure(builder.Configuration);
+AutoMapperConfiguration.AddAutoMapper(builder.Services);
 
 builder.Services.AddControllers();
 
@@ -11,7 +12,6 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
