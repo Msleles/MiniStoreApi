@@ -8,6 +8,7 @@ namespace MiniStore.Infra.Data.Context
         public MiniStoreDbContext(DbContextOptions<MiniStoreDbContext> options): base(options) { }
 
         public DbSet<Produto>? Produtos { get; set; }
+        public DbSet<Categoria>? Categorias { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

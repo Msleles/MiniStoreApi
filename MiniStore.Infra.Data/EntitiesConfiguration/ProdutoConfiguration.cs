@@ -11,6 +11,9 @@ namespace MiniStore.Infra.Data.EntitiesConfiguration
             builder.HasKey(t => t.Id);
             builder.Property(p => p.Nome).HasMaxLength(100).IsRequired();
             builder.Property(p => p.Preco).HasPrecision(18, 2);
+
+            builder.HasOne(e => e.Categoria).WithMany(e => e.Produtos)
+           .HasForeignKey(e => e.CategoriaId);
         }
     }
 }
