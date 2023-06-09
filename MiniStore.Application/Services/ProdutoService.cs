@@ -1,19 +1,21 @@
 ﻿using AutoMapper;
 using MiniStore.Application.DTOs;
 using MiniStore.Application.Interfaces;
+using MiniStore.Application.Interfaces.Notificador;
 using MiniStore.Application.Validators;
 using MiniStore.Domain.Entities;
 using MiniStore.Domain.Interfaces;
 
 namespace MiniStore.Application.Services
 {
-    public class ProdutoService : IProdutoService
+    public class ProdutoService:BaseService, IProdutoService
     {
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
 
         public ProdutoService( 
-            IUnitOfWork uow, IMapper mapper)
+            IUnitOfWork uow, 
+            IMapper mapper, INotificationService _notificador): base(_notificador)
         {
             _uow = uow;
             _mapper = mapper;
@@ -25,16 +27,14 @@ namespace MiniStore.Application.Services
             {
                 var produto = _mapper.Map<Produto>(produtoDTO);
 
-                var validation = new ProdutoValidator();
-                var validationResult = await validation.ValidateAsync(produto);
-                if (!validationResult.IsValid) return null;
-
+                if (!ExecutarValidacao(new ProdutoValidator(), produto)) return null;
+              
                 await _uow.ProdutoRepository.AddProdutoAsync(produto);
                 await _uow.Commit();
 
                 var novoProdutoDTO = _mapper.Map<ProdutoDTO>(produto);
 
-                return novoProdutoDTO;
+                return  novoProdutoDTO;
             }
             catch (Exception ex)
             {
