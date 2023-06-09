@@ -5,6 +5,7 @@ using MiniStore.Application.Interfaces;
 using MiniStore.Application.Interfaces.Notificador;
 using MiniStore.Application.Services;
 using MiniStore.Domain.Interfaces;
+using MiniStore.Domain.Interfaces.Base;
 using MiniStore.Infra.Data.Base;
 using MiniStore.Infra.Data.Context;
 using MiniStore.Infra.Data.Repositories;
