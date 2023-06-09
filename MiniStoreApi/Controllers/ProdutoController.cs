@@ -2,8 +2,6 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using MiniStore.Application.DTOs;
 using MiniStore.Application.Interfaces;
-using MiniStore.Domain.Entities;
-using MiniStore.Domain.Interfaces;
 
 namespace MiniStoreApi.Controllers
 {

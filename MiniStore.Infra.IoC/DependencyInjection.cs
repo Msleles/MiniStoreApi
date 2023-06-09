@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MiniStore.Application.Interfaces;
+using MiniStore.Application.Interfaces.Notificador;
 using MiniStore.Application.Services;
 using MiniStore.Domain.Interfaces;
 using MiniStore.Infra.Data.Base;
@@ -26,6 +27,7 @@ namespace MiniStore.Infra.IoC
             // Serviços
             services.AddScoped<IProdutoService, ProdutoService>();
             services.AddScoped<ICategoriaService, CategoriaService>();
+            services.AddScoped<INotificationService, NotificationService>();
 
 
             return services;
