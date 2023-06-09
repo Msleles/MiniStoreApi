@@ -1,6 +1,11 @@
 # MiniStoreApi
 
-Mini Api construída seguindo os padrões clean architecture como forma de estudo e aprendizado na plataforma .NET
+Apliquei os princípios da Clean Architecture na construção de uma API utilizando a plataforma .NET, como parte do meu estudo e aprendizado. A API possui os seguintes recursos:
+
+. Validação de entidades usando o FluentValidation;
+. Gerenciamento de notificações de erros por meio de um serviço de notificação injetado, reutilizando a lógica de validação e tratamento de erros em diferentes serviços;
+. Serviço de mapeamento com AutoMapper que simplifica o processo de mapeamento de propriedades entre objetos de diferentes tipos;
+. Utilização do padrão de projeto Unit of Work agrupando as operações de leitura e gravação em uma única unidade lógica.
 
 ## Requisitos
 
