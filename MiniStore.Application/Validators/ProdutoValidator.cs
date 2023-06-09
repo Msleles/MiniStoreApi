@@ -13,6 +13,9 @@ namespace MiniStore.Application.Validators
 
             RuleFor(p => p.Preco)
            .GreaterThan(0).WithMessage("O preço do produto deve ser maior que zero.");
+
+            RuleFor(c => c.CategoriaId)
+            .NotNull().WithMessage("A categoria do produto deve ser informada.");
         }
     }
 }
