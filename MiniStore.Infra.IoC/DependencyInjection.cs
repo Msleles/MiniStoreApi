@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MiniStore.Application.ApiClient.Interfaces;
 using MiniStore.Application.ApiClient.Services;
+using MiniStore.Application.Extensions;
 using MiniStore.Application.Interfaces;
 using MiniStore.Application.Interfaces.Notificador;
 using MiniStore.Application.Services;
@@ -22,6 +23,10 @@ namespace MiniStore.Infra.IoC
             services.AddDbContext<MiniStoreDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"
              ), b => b.MigrationsAssembly(typeof(MiniStoreDbContext).Assembly.FullName)));
+
+            // Extensions
+
+            services.AddSingleton<JsonDeserializer>();
 
             // Repositorios
             services.AddScoped<IUnitOfWork, UnitOfWork>();
