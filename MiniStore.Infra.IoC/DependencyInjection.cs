@@ -1,14 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MiniStore.Application.ApiClient.Interfaces;
+using MiniStore.Application.ApiClient.Services;
 using MiniStore.Application.Interfaces;
 using MiniStore.Application.Interfaces.Notificador;
 using MiniStore.Application.Services;
 using MiniStore.Domain.Interfaces;
-using MiniStore.Domain.Interfaces.Base;
 using MiniStore.Infra.Data.Base;
 using MiniStore.Infra.Data.Context;
 using MiniStore.Infra.Data.Repositories;
+
 
 namespace MiniStore.Infra.IoC
 {
@@ -30,6 +32,8 @@ namespace MiniStore.Infra.IoC
             services.AddScoped<ICategoriaService, CategoriaService>();
             services.AddScoped<INotificationService, NotificationService>();
 
+            // Serviços externos
+            services.AddHttpClient<IIBGEApiClientService, IBGEApiClientService>();
 
             return services;
         }

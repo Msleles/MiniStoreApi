@@ -1,5 +1,6 @@
 
 using Microsoft.OpenApi.Models;
+using MiniStore.Application.ApiClient.IBGEApi.Base;
 using MiniStore.Infra.Data.Mappings;
 using MiniStore.Infra.IoC;
 using System.Reflection;
@@ -7,11 +8,13 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddInfrastructure(builder.Configuration);
 AutoMapperConfiguration.AddAutoMapper(builder.Services);
+builder.Services.AddIBGEApiConfiguration(builder.Configuration);
 
 builder.Services.AddControllers();
-
-
 builder.Services.AddEndpointsApiExplorer();
+
+
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Mini Store API", Version = "v1" });
