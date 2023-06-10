@@ -6,7 +6,7 @@ Apliquei os princípios da Clean Architecture na construção de uma API utiliza
 - Gerenciamento de notificações de erros por meio de um serviço de notificação injetado, reutilizando a lógica de validação e tratamento de erros em diferentes serviços.
 - Serviço de mapeamento com AutoMapper que simplifica o processo de mapeamento de propriedades entre objetos de diferentes tipos.
 - Utilização do padrão de projeto Unit of Work agrupando as operações de leitura e gravação em uma única unidade lógica.
-- Obtenção da lista dos estados brasileiros com as informações de cada estado, incluindo sigla, nome e região por meio da comunicação entre api's MiniStore e IBGE como facilitador no cadastro de empresa utilizando HttpClient.
+- Obtenção da lista dos estados brasileiros com as informações de cada estado, incluindo sigla, nome e região por meio da comunicação entre api's MiniStore e IBGE utilizando HttpClient para dar agilidade no cadastro de empresas.
 
 
 ## Requisitos
