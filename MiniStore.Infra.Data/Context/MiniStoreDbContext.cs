@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using MiniStore.Domain.Entities;
+using MiniStore.Infra.Data.Identity;
 
 namespace MiniStore.Infra.Data.Context
 {
-    public class MiniStoreDbContext : DbContext
+    public class MiniStoreDbContext : IdentityDbContext<ApplicationUser>
     {
         public MiniStoreDbContext(DbContextOptions<MiniStoreDbContext> options): base(options) { }
 

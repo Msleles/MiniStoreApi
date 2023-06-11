@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MiniStore.Infra.Data.Context;
 
@@ -11,9 +12,10 @@ using MiniStore.Infra.Data.Context;
 namespace MiniStore.Infra.Data.Migrations
 {
     [DbContext(typeof(MiniStoreDbContext))]
-    partial class MiniStoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230611000000_AddIdentityTables")]
+    partial class AddIdentityTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

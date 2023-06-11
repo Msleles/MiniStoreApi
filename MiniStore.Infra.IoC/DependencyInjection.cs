@@ -7,9 +7,11 @@ using MiniStore.Application.Extensions;
 using MiniStore.Application.Interfaces;
 using MiniStore.Application.Interfaces.Notificador;
 using MiniStore.Application.Services;
+using MiniStore.Domain.Account;
 using MiniStore.Domain.Interfaces;
 using MiniStore.Infra.Data.Base;
 using MiniStore.Infra.Data.Context;
+using MiniStore.Infra.Data.Identity;
 using MiniStore.Infra.Data.Repositories;
 
 
@@ -25,7 +27,6 @@ namespace MiniStore.Infra.IoC
              ), b => b.MigrationsAssembly(typeof(MiniStoreDbContext).Assembly.FullName)));
 
             // Extensions
-
             services.AddSingleton<JsonDeserializer>();
 
             // Repositorios
@@ -36,6 +37,9 @@ namespace MiniStore.Infra.IoC
             services.AddScoped<IProdutoService, ProdutoService>();
             services.AddScoped<ICategoriaService, CategoriaService>();
             services.AddScoped<INotificationService, NotificationService>();
+
+            // IdentityServer
+            services.AddScoped<IAuthenticate, AuthenticateService>();
 
             // Serviços externos
             services.AddHttpClient<IIBGEApiClientService, IBGEApiClientService>();
