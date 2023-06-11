@@ -42,7 +42,7 @@ namespace MiniStore.Infra.IoC
             services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitialService>();
 
             // IdentityServer
-            services.AddIdentity<ApplicationUser, ApplicationUser>()
+            services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<MiniStoreDbContext>()
                 .AddDefaultTokenProviders();
 
