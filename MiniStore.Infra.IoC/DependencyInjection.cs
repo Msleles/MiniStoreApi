@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MiniStore.Application.ApiClient.Interfaces;
@@ -37,9 +38,15 @@ namespace MiniStore.Infra.IoC
             services.AddScoped<IProdutoService, ProdutoService>();
             services.AddScoped<ICategoriaService, CategoriaService>();
             services.AddScoped<INotificationService, NotificationService>();
+            services.AddScoped<IAuthenticate, AuthenticateService>();
+            services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitialService>();
 
             // IdentityServer
-            services.AddScoped<IAuthenticate, AuthenticateService>();
+            services.AddIdentity<ApplicationUser, ApplicationUser>()
+                .AddEntityFrameworkStores<MiniStoreDbContext>()
+                .AddDefaultTokenProviders();
+
+            services.ConfigureApplicationCookie(options => options.AccessDeniedPath = "/Account/Login");
 
             // Serviços externos
             services.AddHttpClient<IIBGEApiClientService, IBGEApiClientService>();
