@@ -13,7 +13,9 @@ using MiniStore.Domain.Interfaces;
 using MiniStore.Infra.Data.Base;
 using MiniStore.Infra.Data.Context;
 using MiniStore.Infra.Data.Identity;
+using MiniStore.Infra.Data.Identity.Jwt;
 using MiniStore.Infra.Data.Repositories;
+
 
 
 namespace MiniStore.Infra.IoC

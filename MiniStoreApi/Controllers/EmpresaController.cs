@@ -1,12 +1,7 @@
-using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MiniStore.Application.ApiClient.Interfaces;
-using MiniStore.Application.DTOs;
-using MiniStore.Application.Interfaces;
 using MiniStore.Application.Interfaces.Notificador;
-using MiniStore.Application.Services;
-using MiniStore.Domain.Pagination;
-using System.Text.Json;
 
 namespace MiniStoreApi.Controllers
 {
@@ -27,6 +22,7 @@ namespace MiniStoreApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Authorize]
         [Route("Estados")]
         public async Task<ActionResult> ObterEstados()
         {

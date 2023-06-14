@@ -1,16 +1,20 @@
-
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using MiniStore.Application.ApiClient.IBGEApi.Base;
+using MiniStore.Infra.Data.Identity.Jwt;
 using MiniStore.Infra.Data.Mappings;
 using MiniStore.Infra.IoC;
 using System.Reflection;
 
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddAuthenticationJwtBearer(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);
 AutoMapperConfiguration.AddAutoMapper(builder.Services);
 builder.Services.AddIBGEApiConfiguration(builder.Configuration);
 
 builder.Services.AddControllers();
+
 builder.Services.AddEndpointsApiExplorer();
 
 
@@ -22,6 +26,31 @@ builder.Services.AddSwaggerGen(c =>
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     c.IncludeXmlComments(xmlPath);
+
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "Insira o token JWT, exemplo: Bearer {seu token}",
+        Name = "Authorization",
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
 });
 
 var app = builder.Build();
@@ -36,8 +65,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
+app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

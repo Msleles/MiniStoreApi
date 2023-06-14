@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MiniStore.Application.DTOs;
+using MiniStore.Domain.Account.Models;
 using MiniStore.Domain.Entities;
 
 namespace MiniStore.Infra.Data.Mappings
@@ -10,6 +11,7 @@ namespace MiniStore.Infra.Data.Mappings
         {
             CreateMap<Produto, ProdutoDTO>().ReverseMap();
             CreateMap<Categoria, CategoriaDTO>().ReverseMap();
+            CreateMap<Usuario, UsuarioDTO>().ReverseMap();        
         }
     }
 }

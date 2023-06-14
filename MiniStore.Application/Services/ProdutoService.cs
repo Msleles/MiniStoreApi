@@ -6,7 +6,6 @@ using MiniStore.Application.Validators;
 using MiniStore.Domain.Entities;
 using MiniStore.Domain.Interfaces;
 using MiniStore.Domain.Pagination;
-using System.Text.Json;
 
 namespace MiniStore.Application.Services
 {

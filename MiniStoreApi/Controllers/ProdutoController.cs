@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MiniStore.Application.DTOs;
 using MiniStore.Application.Interfaces;
@@ -8,6 +9,7 @@ using System.Text.Json;
 
 namespace MiniStoreApi.Controllers
 {
+    [Authorize]
     [Route("[controller]")]
     public class ProdutoController : MainController
     {
@@ -15,9 +17,9 @@ namespace MiniStoreApi.Controllers
         private readonly IProdutoService _produtoService;
         private readonly IMapper _mapper;
 
-        public ProdutoController(ILogger<ProdutoController> logger, 
-            IProdutoService produtoService, 
-            IMapper mapper, INotificationService notificationService): base (notificationService)
+        public ProdutoController(ILogger<ProdutoController> logger,
+            IProdutoService produtoService,
+            IMapper mapper, INotificationService notificationService) : base(notificationService)
         {
             _logger = logger;
             _produtoService = produtoService;
