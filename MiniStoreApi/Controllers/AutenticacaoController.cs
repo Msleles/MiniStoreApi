@@ -24,7 +24,7 @@ namespace MiniStoreApi.Controllers
         }
 
         [HttpPost("register")]
-        [Authorize]
+        [Authorize(AuthenticationSchemes = "Bearer")]
         public async Task<ActionResult<bool>> RegisterUser([FromBody] UsuarioDTO model)
         {
             return await _auth.RegisterUser(model.Email, model.Password);

@@ -8,10 +8,6 @@ namespace MiniStore.Infra.Data.Identity.Jwt
 {
     public static class JwtConfiguration
     {
-        private static string? key;
-        private static string? audience;
-        private static string? Issuer;
-
         public static IServiceCollection AddAuthenticationJwtBearer(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddOptions<JwtConfigurationOptions>()
@@ -29,9 +25,6 @@ namespace MiniStore.Infra.Data.Identity.Jwt
                     options.ExpireHours = configuration?.GetValue<int>("TokenConfiguration:ExpireHours")
                     ?? throw new InvalidOperationException("TokenConfiguration ExpireHours must be set.");
 
-                    key = options.Key;
-                    audience = options.Audience;
-                    Issuer = options.Issuer;
                 });
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).
@@ -41,12 +34,12 @@ namespace MiniStore.Infra.Data.Identity.Jwt
                      ValidateIssuer = true,
                      ValidateAudience = true,
                      ValidateLifetime = true,
-                     ValidAudience = audience,
-                     ValidIssuer = Issuer,
+                     ValidAudience = configuration?.GetValue<string>("TokenConfiguration:Audience"),
+                     ValidIssuer = configuration?.GetValue<string>("TokenConfiguration:Issuer"),
                      ValidateIssuerSigningKey = true,
                      IssuerSigningKey = new SymmetricSecurityKey
                      (
-                         Encoding.UTF8.GetBytes(key
+                         Encoding.UTF8.GetBytes(configuration?.GetValue<string>("Jwt:Key")
                      ))
                  });
 

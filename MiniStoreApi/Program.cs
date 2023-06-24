@@ -1,4 +1,4 @@
-using Microsoft.Extensions.Options;
+using Hangfire;
 using Microsoft.OpenApi.Models;
 using MiniStore.Application.ApiClient.IBGEApi.Base;
 using MiniStore.Infra.Data.Identity.Jwt;
@@ -65,13 +65,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseStaticFiles();
-
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
-
+app.UseHangfireDashboard();
 app.Run();
