@@ -7,6 +7,7 @@ Apliquei os princípios da Clean Architecture na construção de uma API utiliza
 - Serviço de mapeamento com AutoMapper que simplifica o processo de mapeamento de propriedades entre objetos de diferentes tipos.
 - Utilização do padrão de projeto Unit of Work agrupando as operações de leitura e gravação em uma única unidade lógica.
 - Obtenção da lista dos estados brasileiros com as informações de cada estado, incluindo sigla, nome e região por meio da comunicação entre api's MiniStore e IBGE utilizando HttpClient para dar agilidade no cadastro de empresas.
+- Autenticação e autorização utilizando a estrutura do Identity Identity Server e JWT (JSON Web Token) 
 
 
 ## Requisitos
