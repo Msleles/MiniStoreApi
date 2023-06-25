@@ -13,13 +13,15 @@ namespace MiniStore.Application.Services
     {
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
+        private readonly IEmailService _emailService;
 
         public ProdutoService( 
             IUnitOfWork uow, 
-            IMapper mapper, INotificationService _notificador): base(_notificador)
+            IMapper mapper, INotificationService _notificador, IEmailService emailService) : base(_notificador)
         {
             _uow = uow;
             _mapper = mapper;
+            _emailService = emailService;
         }
 
         public PagedList<ProdutoDTO> GetProdutos(ProdutosParameters produtosParameters)
