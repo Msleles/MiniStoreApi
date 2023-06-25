@@ -11,6 +11,7 @@ Apliquei os princípios da Clean Architecture na construção de uma API utiliza
 - Obtenção da lista dos estados brasileiros com as informações de cada estado, incluindo sigla, nome e região por meio da comunicação entre api's MiniStore e IBGE utilizando HttpClient para dar agilidade no cadastro de empresas.
 - Autenticação e autorização utilizando a estrutura do Identity Server e JWT (JSON Web Token)
 - Agendamento de tarefas com o Hangfire que é projetado para lidar com cargas de trabalho intensivas.
+- Serviço de envio de e-mails com integração com a plataforma de comunicação SendGrid.
  
 
 
