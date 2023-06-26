@@ -36,7 +36,6 @@ namespace MiniStoreApi.Controllers
         public ActionResult ObterProdutos([FromQuery] ProdutosParameters produtosParameters)
         {
             var produtos = _produtoService.GetProdutos(produtosParameters);
-
             var metadataJson = PaginationHelper.GetPaginationMetadataJson(produtos);
             Response.Headers.Add("X-Pagination", metadataJson);
 
