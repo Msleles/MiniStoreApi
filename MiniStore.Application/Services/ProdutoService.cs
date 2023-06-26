@@ -50,6 +50,8 @@ namespace MiniStore.Application.Services
 
                 var novoProdutoDTO = _mapper.Map<ProdutoDTO>(produto);
 
+               await _emailService.SendEmailAsync("brunasantosleles@hotmail.com", "produto cadastrado", "novo produto cadastrado");
+
                 return  novoProdutoDTO;
             }
             catch (Exception ex)
