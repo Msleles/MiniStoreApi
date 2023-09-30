@@ -12,11 +12,10 @@ using MiniStore.Domain.Account;
 using MiniStore.Domain.Interfaces;
 using MiniStore.Infra.Data.Base;
 using MiniStore.Infra.Data.Context;
+using MiniStore.Infra.Data.Dapper.Interface;
 using MiniStore.Infra.Data.HangFireConfigurations;
 using MiniStore.Infra.Data.Identity;
 using MiniStore.Infra.Data.Repositories;
-
-
 
 namespace MiniStore.Infra.IoC
 {
@@ -46,6 +45,7 @@ namespace MiniStore.Infra.IoC
             services.AddScoped<IAuthenticate, AuthenticateService>();
             services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitialService>();
             services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<IDatabaseConnection, IDatabaseConnection>();
 
             // IdentityServer
             services.AddIdentity<ApplicationUser, IdentityRole>()

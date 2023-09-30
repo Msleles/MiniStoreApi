@@ -2,6 +2,7 @@ using Hangfire;
 using Microsoft.OpenApi.Models;
 using MiniStore.Application.ApiClient.IBGEApi.Base;
 using MiniStore.Application.SendGrid;
+using MiniStore.Infra.Data.Dapper;
 using MiniStore.Infra.Data.Identity.Jwt;
 using MiniStore.Infra.Data.Mappings;
 using MiniStore.Infra.IoC;
@@ -14,6 +15,7 @@ builder.Services.AddSendGridConfiguration(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);
 AutoMapperConfiguration.AddAutoMapper(builder.Services);
 builder.Services.AddIBGEApiConfiguration(builder.Configuration);
+builder.Services.AddConnectionString(builder.Configuration);
 
 builder.Services.AddControllers();
 
