@@ -8,28 +8,27 @@ namespace MiniStore.Infra.Data.Dapper
 {
     public class DatabaseConnection : IDatabaseConnection
     {
-        private  IDbConnection _connection;
+        private readonly string _connectionString;
+        private IDbConnection _connection;
         private IDbTransaction _transaction;
-        private readonly IOptions<DataBaseConnectionStringOptions> _options;
 
-        public DatabaseConnection(IDbConnection connection, 
-            IOptions<DataBaseConnectionStringOptions> options, IDbTransaction transaction)
+        public DatabaseConnection(IOptions<DataBaseConnectionStringOptions> options)
         {
-            _options = options;
-            _connection = connection;
-            _transaction = transaction;
+            _connectionString = options.Value.ConnectionString;
         }
 
         public IDbConnection GetOpenConnection()
         {
             if (_connection == null)
             {
-                _connection = new SqlConnection(_options.Value.ConnectionString);
+                _connection = new SqlConnection(_connectionString);
                 _connection.Open();
+                _transaction = _connection.BeginTransaction();
             }
             else if (_connection.State != ConnectionState.Open)
             {
                 _connection.Open();
+                _transaction = _connection.BeginTransaction();
             }
 
             return _connection;
@@ -47,7 +46,7 @@ namespace MiniStore.Infra.Data.Dapper
         {
             using (var connection = GetOpenConnection())
             {
-                return connection.Execute(sql, parameters);
+                return connection.Execute(sql, parameters, _transaction);
             }
         }
 
@@ -55,7 +54,7 @@ namespace MiniStore.Infra.Data.Dapper
         {
             using (var connection = GetOpenConnection())
             {
-                return connection.ExecuteScalar<T>(sql, parameters);
+                return connection.ExecuteScalar<T>(sql, parameters, _transaction);
             }
         }
 
@@ -63,7 +62,7 @@ namespace MiniStore.Infra.Data.Dapper
         {
             using (var connection = GetOpenConnection())
             {
-                return connection.Query<T>(sql, parameters);
+                return connection.Query<T>(sql, parameters, _transaction);
             }
         }
 
@@ -92,7 +91,7 @@ namespace MiniStore.Infra.Data.Dapper
         public void Dispose()
         {
             CloseConnection();
-            _connection.Dispose();
-        }      
+            _connection?.Dispose();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,10 +13,12 @@ using MiniStore.Domain.Account;
 using MiniStore.Domain.Interfaces;
 using MiniStore.Infra.Data.Base;
 using MiniStore.Infra.Data.Context;
+using MiniStore.Infra.Data.Dapper;
 using MiniStore.Infra.Data.Dapper.Interface;
 using MiniStore.Infra.Data.HangFireConfigurations;
 using MiniStore.Infra.Data.Identity;
 using MiniStore.Infra.Data.Repositories;
+using System.Data;
 
 namespace MiniStore.Infra.IoC
 {
@@ -27,6 +30,14 @@ namespace MiniStore.Infra.IoC
             services.AddDbContext<MiniStoreDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"
              ), b => b.MigrationsAssembly(typeof(MiniStoreDbContext).Assembly.FullName)));
+
+
+            // Dapper
+            services.AddScoped<IDbConnection>(provider =>
+            {
+                var connectionString = configuration.GetConnectionString("DefaultConnection");
+                return new SqlConnection(connectionString);
+            });
 
             // HangFire
             services.AddHangfireJob(configuration.GetConnectionString("DefaultConnection"));
@@ -45,7 +56,7 @@ namespace MiniStore.Infra.IoC
             services.AddScoped<IAuthenticate, AuthenticateService>();
             services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitialService>();
             services.AddScoped<IEmailService, EmailService>();
-            services.AddScoped<IDatabaseConnection, IDatabaseConnection>();
+            services.AddScoped<IDatabaseConnection, DatabaseConnection>();
 
             // IdentityServer
             services.AddIdentity<ApplicationUser, IdentityRole>()

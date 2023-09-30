@@ -59,5 +59,10 @@ namespace MiniStore.Application.Services
                 return null;
             }
         }
+
+        public async Task<bool> DeleteProduto(Guid produtoId)
+        {
+           return await _uow.ProdutoRepository.DeleteProdutoAsync(produtoId);
+        }
     }
 }

@@ -7,5 +7,6 @@ namespace MiniStore.Application.Interfaces
     {
         Task<ProdutoDTO> Novo(ProdutoDTO produtoDTO);
         PagedList<ProdutoDTO> GetProdutos(ProdutosParameters produtosParameters);
+        Task<bool> DeleteProduto(Guid produtoId);
     }
 }

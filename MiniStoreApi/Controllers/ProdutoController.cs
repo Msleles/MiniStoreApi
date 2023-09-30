@@ -53,5 +53,16 @@ namespace MiniStoreApi.Controllers
             var produto = await _produtoService.Novo(produtoDTO);
             return ServiceResponse(produto);
         }
+
+        /// <summary>
+        /// Exclui um produto.
+        /// </summary>
+        /// <param name="produtoId">Id do produto a ser deletado.</param>
+        /// <returns>Uma resposta HTTP que indica o resultado da operação.</returns>
+        [HttpDelete]
+        public async Task<ActionResult> ExcluirProduto(Guid produtoId)
+        {
+           return ServiceResponse( await _produtoService.DeleteProduto(produtoId));
+        }
     }
 }
